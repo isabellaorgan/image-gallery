@@ -30318,7 +30318,8 @@
 	        headingText: '@',
 	        formName: '@',
 	        image: '=',
-	        save: '&'
+	        save: '&',
+	        imageUrl: '@'
 	      },
 	      controller: function($scope) {
 	        $scope.image = $scope.image || {mainImg: 'img/stache_cat.gif'};
