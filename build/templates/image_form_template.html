@@ -1,0 +1,15 @@
+
+<div>
+  <form name="{{formName}}" class="newImageForm" data-ng-submit="save({image:image})">
+    <h2>{{headingText}}</h2>
+
+    <label for="imageURL" class="imglabel">Image URL:</label>
+    <input type="text" id="imageURL" required data-ng-model="image.url">
+
+    <label for="imageCaption" class="imglabel">Image Caption:</label>
+    <input type="text" id="imageCaption" data-ng-model="image.caption" placeholder="Photo">
+
+    <button class="button" data-ng-disabled="{{formName}}.$invalid" type="submit">{{buttonText}}</button>
+
+  <ng-transclude></ng-transclude>
+</div>

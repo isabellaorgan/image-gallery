@@ -50,9 +50,9 @@
 
 	var imageGalleryApp = angular.module('ImageGalleryApp', ['ngRoute']);
 	__webpack_require__(4)(imageGalleryApp);
-	__webpack_require__(5)(imageGalleryApp);
 	__webpack_require__(6)(imageGalleryApp);
-	__webpack_require__(7)(imageGalleryApp);
+	__webpack_require__(8)(imageGalleryApp);
+	__webpack_require__(10)(imageGalleryApp);
 
 	imageGalleryApp.config(['$routeProvider', function($route) {
 	  $route
@@ -31823,27 +31823,241 @@
 
 /***/ },
 /* 4 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	
+	module.exports = function(app) {
+	  __webpack_require__(5)(app);
+	};
+
 
 /***/ },
 /* 5 */
 /***/ function(module, exports) {
 
-	
+	module.exports = function(app) {
+	  app.filter('listify', function() {
+	    return function(input) {
+	      return input[0].toUpperCase() + input.slice(1, input.length) + 'List';
+	    };
+	  });
+	};
+
 
 /***/ },
 /* 6 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	
+	module.exports = function(app) {
+	  __webpack_require__(7)(app);
+	};
+
 
 /***/ },
 /* 7 */
 /***/ function(module, exports) {
 
-	
+	var handleSuccess = function(callback)  {
+	  return function(res) {
+	    callback(null, res.data);
+	  };
+	};
+
+	var handleFail = function(callback) {
+	  return function(res) {
+	    callback(res.data);
+	  };
+	};
+	module.exports = function(app) {
+	  app.factory('resource', ['$http', function($http) {
+	    return function(resourceName) {
+	      var resource = {};
+	      resource.getAll = function(callback) {
+	        $http.get('/api/' + resourceName)
+	          .then(handleSuccess(callback), handleFail(callback));
+	      };
+
+	      resource.create = function(data, callback) {
+	        $http.post('/api/' + resourceName, data)
+	        .then(handleSuccess(callback), handleFail(callback));
+	      };
+	      return resource;
+	    };
+	  }]);
+	};
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+	  __webpack_require__(9)(app);
+	};
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.directive('listDirective',
+	  function() {
+	    return {
+	      restrict: 'AC',
+	      templateUrl: '/templates/list_directive_template.html',
+	      transclude: true,
+	      scope: {
+	        resource: '=',
+	        title: '@'
+	      }
+	    };
+	  });
+	};
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+	  __webpack_require__(11)(app);
+	  __webpack_require__(12)(app);
+	  __webpack_require__(13)(app);
+	  __webpack_require__(14)(app);
+	};
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	var angular = window.angular;
+	module.exports = function(app) {
+	  app.controller('ImagesController', ['$scope', '$http', 'resource', function($scope, $http, resource) {
+	    $scope.images = [];
+	    $scope.errors = [];
+	    $scope.defaults = {caption: 'photo'};
+	    $scope.newImage = angular.copy($scope.defaults);
+	    $scope.messageOne = 'Hello from inside the controller!';
+	    var imagesResource = resource('images');
+
+	    $scope.getAll = function() {
+	      imagesResource.getAll(function(err, data) {
+	        if (err) return err;
+
+	        $scope.images = data;
+	      });
+	    };
+
+	    $scope.create = function(image) {
+	      imagesResource.create(image, function(err, data){
+	        if (err) return err;
+	        $scope.images.push(data);
+	        $scope.newImage = angular.copy($scope.defaults);
+	      });
+	    };
+
+	    $scope.update = function(image) {
+	      image.editing = false;
+	      $http.put('/api/images/' + image._id, image)
+	        .then(function(res) {
+	          console.log('Image has a new caption');
+	        }, function(err) {
+	          $scope.errors.push('could not get image: ' + image.url + ' to submit');
+	          console.log(err.data);
+	        });
+	    };
+
+	    $scope.edit = function(image) {
+	      image.editing = !image.editing;
+	      image.currentName = image.url;
+	    };
+
+	    $scope.cancel = function(image) {
+	      image.url = image.currentURL;
+	    };
+
+	    $scope.remove = function(image) {
+	      $scope.images.splice($scope.images.indexOf(image), 1);
+	      $http.delete('/api/images/' + image._id)
+	        .then(function(res) {
+	          console.log('Image has been removed');
+	        }, function(err) {
+	          console.log(err.data);
+	          $scope.errors.push('Unable to remove Image: ' + image.url);
+	          $scope.getAll();
+	        });
+	    };
+	  }]);
+	};
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.directive('imageDirective',
+	  function() {
+	    return {
+	      restrict: 'AC',
+	      replace: true,
+	      transclude: true,
+	      templateUrl: '/templates/image_directive_template.html',
+	      scope: {
+	        image: '=',
+	      }
+	    };
+	  });
+	};
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.directive('imageTransclude',
+	  function() {
+	    return {
+	      restrict: 'AC',
+	      templateUrl: '/templates/image_transclude_directive',
+	      replace: true,
+	      transclude: true,
+	      scope: {
+	        messageOne: '@'
+	      }
+
+	    };
+	  });
+	};
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.directive('imageFormDirective', function() {
+	    return {
+	      restrict: 'AC',
+	      replace: true,
+	      templateUrl: '/templates/image_form_template.html',
+	      transclude: true,
+	      scope: {
+	        buttonText: '@',
+	        headingText: '@',
+	        formName: '@',
+	        image: '=',
+	        save: '&'
+	      },
+	      controller: function($scope) {
+	        $scope.image = $scope.image || {mainImg: 'img/stache_cat.gif'};
+	      }
+	    };
+	  });
+	};
+
 
 /***/ }
 /******/ ]);

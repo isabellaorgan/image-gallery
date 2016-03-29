@@ -50,7 +50,7 @@ describe('image routes', function() {
     it('should be able to modify an image', function(done) {
       chai.request('localhost:3000')
         .put('/api/images/' + this.image._id)
-        .send({url: 'a different image'})
+        .send({name: 'a different image'})
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res.body.msg).to.eql('success!');
