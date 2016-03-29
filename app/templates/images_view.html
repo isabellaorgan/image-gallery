@@ -16,16 +16,10 @@
       <li data-ng-repeat="image in images">
         <div class="imagedata" data-image-directive data-image="image"></div>
         <div data-image-form-directive
-        data-ng-if="image.editing"
         data-button-text="Save Image"
-        data-form-name="edit{{image._id}}"
-        data-image="image"
-        data-heading-text="Editing {{image.url}}"
-        data-save="update(image)">
-        <button type="button" class="button" data-ng-click="cancel(image)">Cancel</button>
+        data-img-url="{{image.url}}">
+        <img src="{{image.url}}" />
         </div>
-        <button class="button" data-ng-click="edit(image)">This Photo could be updated</button>
-        <button class="button" data-ng-if="!image.editing" data-ng-click="remove(image)">Remove this Photo.</button>
       </li>
     </ul>
   </section>
