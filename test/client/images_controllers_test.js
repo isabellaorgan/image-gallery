@@ -1,7 +1,7 @@
 require(__dirname + '/../../app/js/entry');
 require('angular-mocks');
 
-describe('imagess controller', function() {
+describe('images controller', function() {
   var $httpBackend;
   var $ControllerConstructor;
   var $scope;
@@ -34,20 +34,20 @@ describe('imagess controller', function() {
     });
 
     it('should add an array to images with a GET all', function() {
-      $httpBackend.expectGET('/api/images').respond(200, [{_id: 1, name: 'test image'}]);
+      $httpBackend.expectGET('/api/images').respond(200, [{_id: 1, url: 'test image'}]);
       $scope.getAll();
       $httpBackend.flush();
-      expect($scope.images[0].name).toBe('test image');
+      expect($scope.images[0].url).toBe('test image');
     });
 
     it('should be able to submit a new image', function() {
-      $httpBackend.expectPOST('/api/images', {name: 'test image', caption: 'Photo'}).respond(200, {name: 'a different image'});
+      $httpBackend.expectPOST('/api/images', {url: 'test image', caption: 'Photo'}).respond(200, {url: 'a different image'});
       expect($scope.images.length).toBe(0);
       expect($scope.newImage).toEqual($scope.defaults);
       $scope.newImage.name = 'test image';
       $scope.create($scope.newImage);
       $httpBackend.flush();
-      expect($scope.images[0].name).toBe('a different image');
+      expect($scope.images[0].url).toBe('a different image');
       expect($scope.newImage).toEqual($scope.defaults);
     });
 
@@ -60,7 +60,7 @@ describe('imagess controller', function() {
     });
 
     it('should be able to remove an image', function () {
-      var image = {_id: 1, name: 'test image'};
+      var image = {_id: 1, url: 'test image'};
       $scope.images = [image];
       $httpBackend.expectDELETE('/api/images/1').respond(200);
       $scope.remove(image);
