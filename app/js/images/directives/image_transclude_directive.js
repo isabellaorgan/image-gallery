@@ -1,6 +1,5 @@
 module.exports = function(app) {
-  app.directive('imageTransclude',
-  function() {
+  app.directive('imageTransclude', function() {
     return {
       restrict: 'AC',
       templateUrl: '/templates/image_transclude_directive',

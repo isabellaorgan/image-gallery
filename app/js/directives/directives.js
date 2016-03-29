@@ -1,3 +1,3 @@
 module.exports = function(app) {
-  require('./list_directives')(app);
+  require('./list_directive')(app);
 };

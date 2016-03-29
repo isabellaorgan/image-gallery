@@ -1,6 +1,5 @@
 module.exports = function(app) {
-  app.directive('imageDirective',
-  function() {
+  app.directive('imageDirective', function() {
     return {
       restrict: 'AC',
       replace: true,
