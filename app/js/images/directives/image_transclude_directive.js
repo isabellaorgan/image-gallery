@@ -1,13 +1,14 @@
 module.exports = function(app) {
-  app.directive('imageDirective', function() {
+  app.directive('imageTransclude', function() {
     return {
       restrict: 'AC',
+      templateUrl: '/templates/image_transclude_directive',
       replace: true,
       transclude: true,
-      templateUrl: '/templates/image_directive_template.html',
       scope: {
-        image: '=',
+        messageOne: '@'
       }
+
     };
   });
 };

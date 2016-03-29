@@ -6,7 +6,7 @@ var expect = chai.expect;
 process.env.MONGOLAB_URI = 'mongodb://localhost/image_gallery_test';
 require(__dirname + '/../server');
 var mongoose = require('mongoose');
-var Bear = require(__dirname + '/../models/image');
+var Image = require(__dirname + '/../models/image');
 
 describe('image routes', function() {
   after(function(done) {
@@ -40,7 +40,7 @@ describe('image routes', function() {
 
   describe('show an image', function() {
     beforeEach(function(done) {
-      (new Bear({name: 'test image'})).save(function(err, data) {
+      (new Image({url: 'test image'})).save(function(err, data) {
         expect(err).to.eql(null);
         this.image = data;
         done();
