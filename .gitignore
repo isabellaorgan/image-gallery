@@ -1,0 +1,16 @@
+**/*.sw?
+**/node_modules
+**/db
+npm-debug.log
+.DS_Store
+.ds_store
+
+mongod.lock
+local.0
+local.ns
+storage.bson
+colourblindr_dev.0
+colourblindr_dev.ns
+**/_tmp
+**/journal
+.env

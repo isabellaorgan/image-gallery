@@ -1,0 +1,26 @@
+ul {
+  @include container-format($color-scheme3, $width: 57%);
+  @include text-format(left);
+  padding: 10px, 30px, 30px, 30px;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+li {
+  @include text-format(left);
+  list-style-type: none;
+  font-weight: 700;
+  padding: 0, 30px, 30px, 30px;
+  margin-top: 30px;
+}
+
+.errorslist {
+  @include container-format($color-scheme1);
+  padding: 10px, 10px, 30px, 30px;
+  margin-left: 10px;
+}
+
+.imagedata {
+  text-align: left;
+  padding-top: 20px;
+}

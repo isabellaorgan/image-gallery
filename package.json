@@ -1,0 +1,37 @@
+{
+  "name": "image-gallery",
+  "version": "0.1.0",
+  "description": "submit a link to an image and a description of the image. Important note: you do not have to allow them to submit an actual image, just a link to one. This link/caption should be saved on a sever and the page should retrieve those image links and render them on a page, it can be the same page that allows users to submit new links.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "isabellaorgan@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.2.8"
+  },
+  "devDependencies": {
+    "angular": "^1.4.8",
+    "angular-mocks": "^1.4.8",
+    "angular-route": "^1.4.8",
+    "chai": "^3.4.1",
+    "chai-http": "^1.0.0",
+    "gulp": "^3.9.0",
+    "gulp-concat-css": "^2.2.0",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-watch": "^4.3.5",
+    "jasmine-core": "^2.4.0",
+    "karma": "^0.13.15",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-qunit": "^0.1.8",
+    "mocha": "^2.3.4",
+    "phantomjs": "^1.9.19",
+    "qunitjs": "^1.20.0",
+    "webpack-stream": "^2.2.0"
+  }
+}

@@ -1,0 +1,33 @@
+a:link {
+  color: $color-scheme5;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $color-scheme5;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: $color-scheme2;
+}
+
+input:focus, input:hover {
+  background-color: $color-scheme3;
+  border: 1px solid $color-scheme4;
+}
+
+.button:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #9ba892), color-stop(1, #dbe6c4));
+  background:-moz-linear-gradient(top, #9ba892 5%, #dbe6c4 100%);
+  background:-webkit-linear-gradient(top, #9ba892 5%, #dbe6c4 100%);
+  background:-o-linear-gradient(top, #9ba892 5%, #dbe6c4 100%);
+  background:-ms-linear-gradient(top, #9ba892 5%, #dbe6c4 100%);
+  background:linear-gradient(to bottom, #9ba892 5%, #dbe6c4 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9ba892', endColorstr='#dbe6c4',GradientType=0);
+  background-color:#9ba892;
+}
+.button:active {
+  position:relative;
+  top:1px;
+}

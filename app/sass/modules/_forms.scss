@@ -1,0 +1,12 @@
+.newImageForm {
+  @include container-format($color-scheme5)
+  @include text-format($color-scheme5);
+  color: $color-scheme1;
+  padding: 30px, 10px, 30px, 20px;
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+
+.imglabel {
+  margin-left: 30px;
+}
